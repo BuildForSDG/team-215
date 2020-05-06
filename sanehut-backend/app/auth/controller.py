@@ -19,7 +19,7 @@ def login():
     request_data = json.loads(request.data.decode('utf-8'))
     email = request_data['email']
     password = request_data['password']
-    
+
     existing_user = AuthService.find_email_password(email)
 
     if existing_user is None:

@@ -15,6 +15,17 @@ class AuthService:
             print("Exception Occurred | {0}".format(str(ex)))
         return user_data
 
+    @staticmethod
+    def find_by_id(user_id: str):
+        try:
+            user_data = Auth.objects(id=user_id).first()
+            if user_data is not None:
+                user_data = user_data.to_dict()
+        except Exception as ex:
+            user_data = None
+            print("Exception Occurred | {0}".format(str(ex)))
+        return user_data
+
     def find_email_password(email: str, include_password=True):
         try:
             user_data = Auth.objects(email=email).first()

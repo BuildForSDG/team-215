@@ -3,13 +3,13 @@ import datetime
 
 
 class Auth(db.Document):
-    """Class for User Model"""
-    firstName = db.StringField(required=True, unique=True)
-    lastName = db.StringField(required=True, unique=True)
+    """Class for Auth Model"""
+    firstName = db.StringField(required=True)
+    lastName = db.StringField(required=True)
     email = db.StringField(required=True, unique=True)
     password = db.StringField(required=True, unique=True)
-    phoneNumber = db.StringField(required=True, unique=True)
-    userType = db.StringField(required=True, unique=True)
+    phoneNumber = db.StringField(required=True)
+    userType = db.StringField(required=True)
     created_at = db.DateTimeField(default=datetime.datetime.utcnow)
 
     def __repr__(self):

@@ -13,8 +13,10 @@ app.config['MONGODB_PASSWORD'] = config.MONGODB_PASSWORD
 db = MongoEngine(app)
 
 from app.auth.controller import auth
+from app.user.controller import user
 
 app.register_blueprint(auth, url_prefix='/api/v1')
+app.register_blueprint(user, url_prefix='/api/v1')
 
 
 @app.errorhandler(404)

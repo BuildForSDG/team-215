@@ -14,7 +14,7 @@ class ApiRequest:
             request_headers = dict(request.headers)
             if 'Content-Type' not in request_headers or 'application/json' not in request_headers['Content-Type']:
                 return jsonify(code="02", msg="JSON is required for this API - Kindly set the Content-Type to "
-                                              "application/json")
+                                              "application/json in the request header")
             elif request.data is None:
                 return jsonify(code="02", msg="JSON data required"), 200
             try:
