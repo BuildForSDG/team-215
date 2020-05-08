@@ -28,7 +28,7 @@ def user_record():
 
     return jsonify(response)
 
-
+# /api/v1/user/record/1
 @user.route('/user/record/<id>', methods=["GET"])
 def get_user_record(id):
 

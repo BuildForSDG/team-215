@@ -57,3 +57,28 @@ def signup():
         print("Exception Occurred | {0}".format(str(ex)))
 
     return jsonify(code="00", msg="User signed up successfully", data=new_user_data)
+
+
+# /api/v1/forgot
+@auth.route('/forgot', methods=["POST"])
+@api_request.json  # check content-type = application.json in the request header
+@api_request.required_body_params('email', 'newPassword')  # validate request body
+def forgot():
+    request_data = json.loads(request.data.decode('utf-8'))
+    email = request_data['email']
+    newPassword = request_data['newPassword']
+
+    if not Helper.is_valid_email(email):
+        return jsonify(code="02", msg="Invalid email address")
+
+    new_password_hash = generate_password_hash(newPassword)
+    request_data['password'] = new_password_hash
+    try:
+        new_user_data = AuthService.update_user(request_data)
+        if new_user_data is None:
+            return jsonify(code="02", msg="User doesnt exist")
+    except Exception as ex:
+        traceback.format_exc()
+        print("Exception Occurred | {0}".format(str(ex)))
+
+    return jsonify(code="00", msg="User password changed successfully")
